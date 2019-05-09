@@ -42,19 +42,21 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<Trip> findTripByStatus(String status) {
+    public List<Trip> findTripByStatus(String status,long id) {
         TripExample tripExample=new TripExample();
         tripExample.createCriteria()
-                .andStatusEqualTo(status);
+                .andStatusEqualTo(status)
+                .andUserIdEqualTo(id);
         List<Trip> trips = tripMapper.selectByExample(tripExample);
         return trips;
     }
 
     @Override
-    public List<Trip> findTripByTime(String time) {
+    public List<Trip> findTripByTime(String time,long id) {
         TripExample tripExample=new TripExample();
         tripExample.createCriteria()
-                .andTimeEqualTo(time);
+                .andTimeEqualTo(time)
+                .andUserIdEqualTo(id);
         List<Trip> trips = tripMapper.selectByExample(tripExample);
         return trips;
     }

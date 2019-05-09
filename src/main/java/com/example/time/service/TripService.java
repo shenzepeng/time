@@ -10,6 +10,6 @@ public interface TripService {
     void updateTripById(Trip trip);
     Trip findTripById(long id);
     List<Trip> findTripByUserId(long userId);
-    List<Trip> findTripByStatus(String status);
-    List<Trip> findTripByTime(String time);
+    List<Trip> findTripByStatus(String status,long id);
+    List<Trip> findTripByTime(String time,long id);
 }

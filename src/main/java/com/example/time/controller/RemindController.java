@@ -16,7 +16,7 @@ public class RemindController {
     private RemindService remindService;
     @ApiOperation("通过id删除Remind")
     @DeleteMapping("/deleteRemindById.action")
-    public SzpJsonResult deleteRemindById(long id){
+    public SzpJsonResult deleteRemindById(Long id){
         remindService.deleteRemindById(id);
         return SzpJsonResult.ok();
     }
@@ -35,17 +35,18 @@ public class RemindController {
     @PutMapping("/updateRemindById.action")
     public SzpJsonResult updateRemindById(@RequestBody Remind remind){
         remindService.updateRemindById(remind);
-        return SzpJsonResult.ok();
+        Remind remindById = remindService.findRemindById(remind.getId());
+        return SzpJsonResult.ok(remindById);
     }
     @ApiOperation("通过主键id找到Remind")
     @GetMapping("/findRemindById.action")
-    public SzpJsonResult findRemindById(long id){
+    public SzpJsonResult findRemindById(Long id){
         Remind remindById = remindService.findRemindById(id);
         return SzpJsonResult.ok(remindById);
     }
     @ApiOperation("通过UserID找到Remind")
     @GetMapping("/findRemindByUserId.action")
-    public SzpJsonResult findRemindByUserId(long userId){
+    public SzpJsonResult findRemindByUserId(Long userId){
         List<Remind> remindByUserId = remindService.findRemindByUserId(userId);
         return SzpJsonResult.ok(remindByUserId);
     }

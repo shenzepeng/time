@@ -19,8 +19,12 @@ public class UserController {
     @PostMapping("/insertUser.action")
     public SzpJsonResult insertUser(@RequestBody User user){
         if (user.getPassword()!=null&&user.getUsername()!=null){
-            userService.insertUser(user);
-            return SzpJsonResult.ok();
+            List<User> userByUsername = userService.findUserByUsername(user.getUsername());
+            if(userByUsername.size()==0||userByUsername==null){
+                userService.insertUser(user);
+                return SzpJsonResult.ok();
+            }
+            return SzpJsonResult.errorMsg("该用户已注册");
         }else{
             return SzpJsonResult.errorMsg("未获取到user");
         }
@@ -35,13 +39,14 @@ public class UserController {
     @PutMapping("/updateUserById.action")
     public SzpJsonResult updateUserById(@RequestBody User user){
         userService.updateUserById(user);
-        return SzpJsonResult.ok();
+        User userById = userService.findUserById(user.getId());
+        return SzpJsonResult.ok(userById);
     }
     @ApiOperation("通过id找到User")
     @GetMapping("/findUserById.action")
     public SzpJsonResult findUserById(long id){
-        userService.findUserById(id);
-        return SzpJsonResult.ok();
+        User userById = userService.findUserById(id);
+        return SzpJsonResult.ok(userById);
     }
     @ApiOperation("通过username找到User")
     @GetMapping("/findUserByUsername.action")
@@ -53,7 +58,10 @@ public class UserController {
     @GetMapping("/findUserByUsernameAndPassword.action")
     public SzpJsonResult findUserByUsernameAndPassword(String username,String password){
         List<User> userByUsernameAndPassword = userService.findUserByUsernameAndPassword(username, password);
-        return SzpJsonResult.ok(userByUsernameAndPassword);
+        if (userByUsernameAndPassword.size()!=0&&userByUsernameAndPassword!=null){
+            return SzpJsonResult.ok(userByUsernameAndPassword);
+        }
+        return SzpJsonResult.errorMsg("请检查用户名和密码");
     }
     @ApiOperation("显示所有user")
     @GetMapping("/findAllUsers.action")

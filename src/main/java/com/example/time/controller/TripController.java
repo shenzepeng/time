@@ -23,11 +23,10 @@ public class TripController {
         }else {
             return SzpJsonResult.errorMsg("请检查输入信息");
         }
-
     }
     @ApiOperation("通过id删除Trip")
     @DeleteMapping("/deleteTripById.action")
-    public SzpJsonResult deleteTripById(@RequestBody long id){
+    public SzpJsonResult deleteTripById(@RequestBody Long id){
         tripService.deleteTripById(id);
         return SzpJsonResult.ok();
     }
@@ -39,27 +38,26 @@ public class TripController {
     }
     @ApiOperation("通过id更新Trip")
     @GetMapping("/findTripById.action")
-    public SzpJsonResult findTripById(long id){
-
+    public SzpJsonResult findTripById(Long id){
         Trip tripById = tripService.findTripById(id);
         return SzpJsonResult.ok(tripById);
     }
     @ApiOperation("通过UserId找到Trip")
     @GetMapping("/findTripByUserId.action")
-    public SzpJsonResult findTripByUserId(long userId){
+    public SzpJsonResult findTripByUserId(Long userId){
         List<Trip> tripByUserId = tripService.findTripByUserId(userId);
         return SzpJsonResult.ok(tripByUserId);
     }
     @ApiOperation("通过status找到Trip")
     @GetMapping("/findTripByStatus.action")
-    public SzpJsonResult findTripByStatus(String status){
-        List<Trip> tripByStatus = tripService.findTripByStatus(status);
+    public SzpJsonResult findTripByStatus(String status,Long id){
+        List<Trip> tripByStatus = tripService.findTripByStatus(status,id);
         return SzpJsonResult.ok(tripByStatus);
     }
     @ApiOperation("通过time找到Trip")
     @GetMapping("/findTripByTime.action")
-    public SzpJsonResult findTripByTime(String time){
-        List<Trip> tripByTime = tripService.findTripByTime(time);
+    public SzpJsonResult findTripByTime(String time,Long id){
+        List<Trip> tripByTime = tripService.findTripByTime(time,id);
         return SzpJsonResult.ok(tripByTime);
     }
 }

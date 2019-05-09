@@ -10,7 +10,7 @@ public interface PlanService {
     void updatePlanById(Plan plan);
     Plan findPlanById(long id);
     List<Plan> findPlanByUserId(long id);
-    List<Plan> findPlanByTitle(String title);
-    List<Plan> findPlanByTime(String time);
-    List<Plan> findPlanByStatus(String status);
+    List<Plan> findPlanByTitle(String title,long id);
+    List<Plan> findPlanByTime(String time,long id);
+    List<Plan> findPlanByStatus(String status,long id);
 }

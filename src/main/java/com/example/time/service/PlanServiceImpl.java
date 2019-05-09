@@ -43,28 +43,31 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Plan> findPlanByTitle(String title) {
+    public List<Plan> findPlanByTitle(String title,long id) {
         PlanExample planExample=new PlanExample();
         planExample.createCriteria()
-                .andTitleLike(title);
+                .andTitleLike(title)
+                .andUserIdEqualTo(id);
         List<Plan> plans = planMapper.selectByExample(planExample);
         return plans;
     }
 
     @Override
-    public List<Plan> findPlanByTime(String time) {
+    public List<Plan> findPlanByTime(String time,long id) {
         PlanExample planExample=new PlanExample();
         planExample.createCriteria()
-                .andTimeEqualTo(time);
+                .andTimeEqualTo(time)
+                .andUserIdEqualTo(id);
         List<Plan> plans = planMapper.selectByExample(planExample);
         return plans;
     }
 
     @Override
-    public List<Plan> findPlanByStatus(String status) {
+    public List<Plan> findPlanByStatus(String status,long id) {
         PlanExample planExample=new PlanExample();
         planExample.createCriteria()
-                .andStatusEqualTo(status);
+                .andStatusEqualTo(status)
+                .andUserIdEqualTo(id);
         List<Plan> plans = planMapper.selectByExample(planExample);
         return plans;
     }
