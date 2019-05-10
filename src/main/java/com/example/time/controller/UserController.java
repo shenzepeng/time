@@ -31,7 +31,7 @@ public class UserController {
     }
     @ApiOperation("通过id删除user")
     @DeleteMapping("/deleteUserById.action")
-    public SzpJsonResult deleteUserById(@RequestBody long id){
+    public SzpJsonResult deleteUserById( long id){
         userService.deleteUserById(id);
         return SzpJsonResult.ok();
     }

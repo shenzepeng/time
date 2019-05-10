@@ -26,7 +26,7 @@ public class TripController {
     }
     @ApiOperation("通过id删除Trip")
     @DeleteMapping("/deleteTripById.action")
-    public SzpJsonResult deleteTripById(@RequestBody Long id){
+    public SzpJsonResult deleteTripById( Long id){
         tripService.deleteTripById(id);
         return SzpJsonResult.ok();
     }
